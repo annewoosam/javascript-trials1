@@ -71,109 +71,209 @@ def get_odd_indices(items):
 
 # This is where we stopped  for lunch.
 # We agreed to save to github and add examples; re-comment;
-# remove the above removed elements (const,;, curly braces); save test cases
+# remove the above removed elements (function(def), const, ;, curly braces; push(append); === to ==); save test cases
 # pre-re-pairing.
-
+# new items that come up are:
+# let
+# console.log
+#` $ f'
 # // Given an array, output a numbered list.
-# //
+# camelcase versus _
+# length
+# no step for range in JavaScript vs Python
+# toUpperCase versus upper()
+# toString versus str()
+
+def print_as_numbered_list(items):
+
+  let i = 1
+
+  for item in items:
+
+      console.log(`${i}. ${item}`)
+
+      i += 1
+
 # // Ex.:
 # // > printAsNumberedList([1, 'hello', true]);
 # // 1. 1
 # // 2. hello
 # // 3. true
 
-def print_as_numbered_list(items):
-    pass  # TODO: replace this line with your code
-
-
 # // Return an array of numbers in a certain range.
-# //
+
+
+def get_range(start, stop):
 # // Ex.:
 # // > getRange(0, 5);
 # // [0, 1, 2, 3, 4]
-# //
+# 
 # // > getRange(1, 3);
 # // [1, 2]
+  nums = []
 
-def get_range(start, stop):
-    pass  # TODO: replace this line with your code
+  for (let num = start; num < stop; num += 1):
 
-
+      nums.append(num)
+  
 # // Given a string, return a string where vowels are replaced with '*'.
-# //
+# 
+
+def censor_vowels(word):
+
+  chars = []
+
+  for letter of word:
+
+      if ('aeiou'.includes(letter)):
+          chars.append('*')
+
+      chars.append(letter)
+
+  return chars.join('')
 # // Ex.:
 # //   > censorVowels('hello world');
 # //   'h*ll* w*rld'
 
-def censor_vowels(word):
-    pass  # TODO: replace this line with your code
-
-
 # // Given a string in snake case, return a string in upper camel case.
-# //
+
+
+def snake_to_camel(string):
+
+  camelCase = []
+
+  for word of string.split('_'):
+    
+    camelCase.append(`${word[0].toUpperCase()}${word.slice(1)}`)
+
+  return camelCase.join('')
+
 # // Ex.:
 # //   > snakeToCamel('hello_world');
 # //   'HelloWorld'
 
-def snake_to_camel(string):
-    pass  # TODO: replace this line with your code
-
-
 # // Return the length of the longest word in the given array of words.
-# //
+
+
+def longest_word_length(words):
+
+    let longest = words[0].length
+
+    for word of words:
+      if longest < word.length:
+        longest = word.length
+
+    return longest
+
 # // Ex.:
 # //   > longestWordLength(['hello', 'world']);
 # //   5
-# //
+# 
 # //   > longestWordLength(['jellyfish', 'zebra']);
 # //   9
 
-def longest_word_length(words):
-    pass  # TODO: replace this line with your code
-
-
 # // Truncate repeating characters into one character.
-# //
+
+
+def truncate(string):
+
+    result = []
+
+    for char in string:
+
+        if result.length == 0 || char != result[result.length - 1]:
+
+            result.append(char)
+
+    return result.join('')
+
 # // Ex.:
 # //   > truncate('aaaabbbbcccca');
 # //   'abca'
-# //
+#
 # //   > truncate('hi***!!!! wooow');
 # //   'hi*! wow'
 
-def truncate(string):
-    pass  # TODO: replace this line with your code
-
 
 # // Return true if all parentheses in a given string are balanced.
-# //
+
+
+
+def has_balanced_parens(string):
+
+  let parens = 0
+
+  for char of string:
+
+    if char == '('):
+
+        parens += 1
+        
+    else if:
+
+        char == ')'
+
+        parens -= 1
+
+    if parens < 0:
+
+        return false
+
+    return parens < 0
+
 # // Ex.:
 # // > hasBalancedParens('()');
 # // true
-# //
+# 
 # // > hasBalancedParens('((This) (is) (good))');
 # // true
-# //
+# 
 # // > hasBalancedParens('(Oh no!)(');
 # // false
 
-def has_balanced_parens(string):
-    pass  # TODO: replace this line with your code
-
 
 # // Return a compressed version of the given string.
-# //
-# // Ex.:
+
+
+def compress(string):
+
+  compressed = []
+
+  let currChar = ''
+
+  let charCount = 0
+
+  for char in string:
+
+      if char != currChar:
+
+          compressed.append(currChar)
+
+      if charCount > 1:
+
+          compressed.append(charCount.toString())
+
+      currChar = char
+
+      charCount = 0
+
+    charCount += 1
+
+  compressed.append(currChar)
+
+      if charCount > 1:
+          compressed.append(charCount.toString())
+
+  return compressed.join('')
+
+    # // Ex.:
 # //   > compress('aabbaabb');
 # //   'a2b2a2b2'
-# //
+# 
 # // If a character appears once, it shouldn't be followed by a number:
 # //   > compress('abc');
 # //   'abc'
-# //
+# 
 # // The function should handle all types of characters:
 # //   > compress('Hello, world! Cows go moooo...');
 # //   'Hel2o, world! Cows go mo4.3'
-
-def compress(string):
-    pass  # TODO: replace this line with your code
