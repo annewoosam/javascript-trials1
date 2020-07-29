@@ -83,19 +83,26 @@ def get_odd_indices(items):
 # no step for range in JavaScript vs Python
 # toUpperCase versus upper()
 # toString versus str()
+# test by loading in python interactive as python -i trials.py
+# copy and paste in test function
+# 2 not working as of 7/28/20
+# use quit() to exit python interactive
+
 
 def print_as_numbered_list(items):
 
-  let i = 1
+    i = 1
 
-  for item in items:
+    for item in items:
 
-      console.log(`${i}. ${item}`)
+        print(f'{i}. {item}')
 
-      i += 1
+        i += 1
+
+# NOT WORKING
 
 # // Ex.:
-# // > printAsNumberedList([1, 'hello', true]);
+# // > print_as_numbered_list([1, 'hello', True])
 # // 1. 1
 # // 2. hello
 # // 3. true
@@ -104,176 +111,187 @@ def print_as_numbered_list(items):
 
 
 def get_range(start, stop):
+
+
+    nums = []
+
+    for num in range(start,stop):
+
+        nums.append(num)
+
+    return nums
+
+# working
+
 # // Ex.:
-# // > getRange(0, 5);
+# // > get_range(0, 5);
 # // [0, 1, 2, 3, 4]
 # 
-# // > getRange(1, 3);
-# // [1, 2]
-  nums = []
+# // > get_range(1, 3);
+# // [1, 2]  
 
-  for (let num = start; num < stop; num += 1):
 
-      nums.append(num)
-  
 # // Given a string, return a string where vowels are replaced with '*'.
-# 
+
 
 def censor_vowels(word):
 
-  chars = []
+    chars = []
 
-  for letter of word:
+    for letter in word:
 
-      if ('aeiou'.includes(letter)):
-          chars.append('*')
+        if  letter in 'aeiou':
 
-      chars.append(letter)
+            chars.append('*')
 
-  return chars.join('')
+        chars.append(letter)
+
+    return ''.join(chars)
+
+# working
+
 # // Ex.:
-# //   > censorVowels('hello world');
+# //   > censor_vowels('hello world')
 # //   'h*ll* w*rld'
 
-# // Given a string in snake case, return a string in upper camel case.
 
-
-def snake_to_camel(string):
-
-  camelCase = []
-
-  for word of string.split('_'):
-    
-    camelCase.append(`${word[0].toUpperCase()}${word.slice(1)}`)
-
-  return camelCase.join('')
-
-# // Ex.:
-# //   > snakeToCamel('hello_world');
-# //   'HelloWorld'
 
 # // Return the length of the longest word in the given array of words.
-
+# ".length to len()"
 
 def longest_word_length(words):
 
-    let longest = words[0].length
+    longest = len(words[0])
 
-    for word of words:
-      if longest < word.length:
-        longest = word.length
+    for word in words:
+
+        if longest < len(word):
+
+            longest = len(word)
 
     return longest
 
+# working
+
 # // Ex.:
-# //   > longestWordLength(['hello', 'world']);
+# //   > longest_word_length(['hello', 'world'])
 # //   5
 # 
-# //   > longestWordLength(['jellyfish', 'zebra']);
+# //   > longest_word_length(['jellyfish', 'zebra'])
 # //   9
 
 # // Truncate repeating characters into one character.
 
 
 def truncate(string):
-
+# || to or
+# result length to reverse only
+# .join('') at end replaced with ''.join at beginning
     result = []
 
     for char in string:
 
-        if result.length == 0 || char != result[result.length - 1]:
+        if len(result) == 0 or char != result[- 1]:
 
             result.append(char)
 
-    return result.join('')
+    return ''.join(result)
+
+# working    
 
 # // Ex.:
-# //   > truncate('aaaabbbbcccca');
+# //   > truncate('aaaabbbbcccca')
 # //   'abca'
 #
-# //   > truncate('hi***!!!! wooow');
+# //   > truncate('hi***!!!! wooow')
 # //   'hi*! wow'
 
 
 # // Return true if all parentheses in a given string are balanced.
 
 
+def compress(string):
+# casing and underscoring
+# removed all lets
+# toStringto str()
 
-def has_balanced_parens(string):
+    compressed = []
 
-  let parens = 0
+    curr_char = ''
 
-  for char of string:
+    char_count = 0
 
-    if char == '('):
+    for char in string:
 
-        parens += 1
-        
-    else if:
+        if char != curr_char:
 
-        char == ')'
+            compressed.append(curr_char)
 
-        parens -= 1
+            if char_count > 1:
 
-    if parens < 0:
+                compressed.append(str(char_count))
 
-        return false
+            curr_char = char
 
-    return parens < 0
+            char_count = 0
+
+        char_count += 1
+
+    compressed.append(curr_char)
+
+    if char_count > 1:
+        compressed.append(str(char_count))
+
+    return ''.join(compressed)
+
+# working    
 
 # // Ex.:
-# // > hasBalancedParens('()');
+# //   > compress('aabbaabb')
+# //   'a2b2a2b2'
+# 
+# // If a character appears once, it shouldn't be followed by a number:
+# //   > compress('abc')
+# //   'abc'
+# 
+# // The function should handle all types of characters:
+# //   > compress('Hello, world! Cows go moooo...')
+# //   'Hel2o, world! Cows go mo4.3'
+
+
+
+def has_balanced_parens(string):
+# else if to elif
+
+    parens = 0
+
+    for char in string:
+
+        if char == '(':
+
+            parens += 1
+        
+        elif char == ')':
+
+            parens -= 1
+
+        if parens > 0:
+
+            return false
+
+        return parens < 0
+
+# Not Working
+
+# // Ex.:
+# // > has_balanced_parens('()')
 # // true
 # 
-# // > hasBalancedParens('((This) (is) (good))');
+# // > has_balanced_parens('((This) (is) (good))')
 # // true
 # 
-# // > hasBalancedParens('(Oh no!)(');
+# // > has_balanced_parens(Oh no!)(')
 # // false
 
 
 # // Return a compressed version of the given string.
-
-
-def compress(string):
-
-  compressed = []
-
-  let currChar = ''
-
-  let charCount = 0
-
-  for char in string:
-
-      if char != currChar:
-
-          compressed.append(currChar)
-
-      if charCount > 1:
-
-          compressed.append(charCount.toString())
-
-      currChar = char
-
-      charCount = 0
-
-    charCount += 1
-
-  compressed.append(currChar)
-
-      if charCount > 1:
-          compressed.append(charCount.toString())
-
-  return compressed.join('')
-
-    # // Ex.:
-# //   > compress('aabbaabb');
-# //   'a2b2a2b2'
-# 
-# // If a character appears once, it shouldn't be followed by a number:
-# //   > compress('abc');
-# //   'abc'
-# 
-# // The function should handle all types of characters:
-# //   > compress('Hello, world! Cows go moooo...');
-# //   'Hel2o, world! Cows go mo4.3'
